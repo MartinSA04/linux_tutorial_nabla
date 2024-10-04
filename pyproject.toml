@@ -1,0 +1,18 @@
+[project]
+name = "linux_tutorial_nabla"
+version = "0.1.0"
+description = "Linux tutorial for nabla members"
+authors = [
+    {name = "Martin Sundal Aspås", email = "martin.s.aspas@gmail.com"},
+]
+dependencies = [
+    "pydantic>=2.9.2",
+    "colorama>=0.4.6",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = true
