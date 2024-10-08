@@ -1,10 +1,10 @@
 
 import copy
 from typing import List
-from colors import Colors
-from common import NablaModel
-from tutorials import Tutorial
-from tutorials import tutorial_list
+from linux_tutorial_nabla.colors import Colors
+from linux_tutorial_nabla.common import NablaModel
+from linux_tutorial_nabla.tutorials import Tutorial
+from linux_tutorial_nabla.tutorials import tutorial_list
 
 
 class TutorialHandler(NablaModel):

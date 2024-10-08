@@ -1,7 +1,0 @@
-total 20
--rw-rw-r-- 1 martin martin 1442 okt.   2 19:23 colors.py
-drwxrwxr-x 2 martin martin 4096 okt.   2 20:44 __pycache__
--rw-rw-r-- 1 martin martin 2219 okt.   2 20:44 terminal.py
--rw-rw-r-- 1 martin martin    0 okt.   2 20:44 test.txt
--rwxrw-r-- 1 martin martin  114 okt.   2 19:27 tutorial
--rw-rw-r-- 1 martin martin  167 okt.   2 19:49 tutorial.py

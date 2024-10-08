@@ -1,5 +1,5 @@
-from common import NablaModel
-from colors import Colors
+from linux_tutorial_nabla.common import NablaModel
+from linux_tutorial_nabla.colors import Colors
 from typing import Callable
 
 class Step(NablaModel):

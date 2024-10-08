@@ -2,13 +2,13 @@ import os
 import subprocess
 
 from pydantic import BaseModel
-from colors import Colors
+from linux_tutorial_nabla.colors import Colors
 import socket
 import getpass
 import copy
 
-from common import NablaModel
-from tutorial_handler import TutorialHandler
+from linux_tutorial_nabla.common import NablaModel
+from linux_tutorial_nabla.tutorial_handler import TutorialHandler
 
 help_message = f"""
     {Colors.g('Custom terminal commands for Nabla Linux tuorial:')}
