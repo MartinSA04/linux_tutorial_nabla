@@ -12,7 +12,6 @@ from linux_tutorial_nabla.tutorial_handler import TutorialHandler
 
 help_message = f"""
     {Colors.g('Custom terminal commands for Nabla Linux tuorial:')}
-
         {Colors.M('exit')}{Colors.g(': Exit the program')} 
         {Colors.M('nablahelp')}{Colors.g(': View this help message')}  
         {Colors.M('home')}{Colors.g(': Return to first screen')}
@@ -21,8 +20,39 @@ help_message = f"""
         {Colors.M('status')}{Colors.g(': View the status of all tutorials and the current step.')}
         {Colors.M('reset')}{Colors.g(': Reset current step.')}
 
-        {Colors.g("NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available.")}
+    {Colors.g('Useful commands for linux terminal:')}
+        {Colors.M('help <command>')}{Colors.g(': View description and help info of a command.')}
+
+
+    {Colors.g("NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available.")}
 """
+
+nabla_art = """
+                    @                                                                       
+   @@@@@@@@@@@@@@@@@    _   _       _     _                                                                            
+  @@@@ @         @@    | \ | |     | |   | |                                          
+     @@ @       @      |  \| | __ _| |__ | | __ _                                  
+      @@ @     @       | . ` |/ _` | '_ \| |/ _` |                                  
+       @@ @   @        | |\  | (_| | |_) | | (_| |                                  
+        @@ @ @         |_| \_|\__,_|_.__/|_|\__,_|                                  
+         @@ @                                                                               
+          @@@                                                                               
+        """
+
+start_message = f"""
+        {Colors.g('Welcome to the')} {Colors.B('Nabla')} {Colors.g('Linux Tutorial!')}
+        {Colors.B(nabla_art)}
+        {Colors.g('This is a terminal tutorial by/for')} {Colors.B('Nabla')} {Colors.g('components.')}
+        {Colors.g('You can run any command you want, and we will try to help you understand it.')}
+
+        {Colors.g('To exit the tutorial, type')} {Colors.M('exit')} {Colors.g('and press enter.')}
+        {Colors.g('To get help, type')} {Colors.M('nablahelp')} {Colors.g('and press enter.')}
+        {Colors.g('To return here, type')} {Colors.M('home')} {Colors.g('and press enter.')}
+
+        {Colors.g('Type')} {Colors.M('start')} {Colors.g('and press enter to see completed and available tutorials.')}
+
+        {Colors.g("NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available.")}
+        """
 
 
 class Terminal(NablaModel):
@@ -47,34 +77,12 @@ class Terminal(NablaModel):
         return input(f"{self.terminal_pwd}$ ")
     
     def print_home_page(self):
-        nabla_art = """
-                    @                                                                       
-   @@@@@@@@@@@@@@@@@    _   _       _     _                                                                            
-  @@@@ @         @@    | \ | |     | |   | |                                          
-     @@ @       @      |  \| | __ _| |__ | | __ _                                  
-      @@ @     @       | . ` |/ _` | '_ \| |/ _` |                                  
-       @@ @   @        | |\  | (_| | |_) | | (_| |                                  
-        @@ @ @         |_| \_|\__,_|_.__/|_|\__,_|                                  
-         @@ @                                                                               
-          @@@                                                                               
-        """
-        print(f"""
-        {Colors.g('Welcome to the')} {Colors.B('Nabla')} {Colors.g('Linux Tutorial!')}
-        {Colors.B(nabla_art)}
-        {Colors.g('This is a terminal tutorial by/for')} {Colors.B('Nabla')} {Colors.g('components.')}
-        {Colors.g('You can run any command you want, and we will try to help you understand it.')}
-
-        {Colors.g('To exit the tutorial, type')} {Colors.M('exit')} {Colors.g('and press enter.')}
-        {Colors.g('To get help, type')} {Colors.M('nablahelp')} {Colors.g('and press enter.')}
-        {Colors.g('To return here, type')} {Colors.M('home')} {Colors.g('and press enter.')}
-
-        {Colors.g('Type')} {Colors.M('start')} {Colors.g('and press enter to see completed and available tutorials.')}
-
-        {Colors.g("NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available.")}
-        """)
+        print(start_message)
 
     def run(self):
         self.print_home_page()
+        self.tutorial_handler.read_user_data(self.username)
+
         while True:
 
             command = self.terminal_input()
@@ -93,7 +101,8 @@ class Terminal(NablaModel):
             else:
                 print(process.stdout.decode(), end="")
                 
-                self.tutorial_handler.check_completion(command, self.pwd)
+                if self.tutorial_handler.check_completion(command, self.pwd):
+                    self.tutorial_handler.write_user_data(self.username)
     
     def check_command(self, command: str) -> str:
         command = command.strip()

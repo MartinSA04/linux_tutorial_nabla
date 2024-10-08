@@ -1,23 +1,51 @@
 
+import pathlib
 import copy
+import json
 from typing import List
 from linux_tutorial_nabla.colors import Colors
-from linux_tutorial_nabla.common import NablaModel
-from linux_tutorial_nabla.tutorials import Tutorial
+from linux_tutorial_nabla.common import NablaModel, user_data_path
+from linux_tutorial_nabla.tutorial import Tutorial
 from linux_tutorial_nabla.tutorials import tutorial_list
 
 
 class TutorialHandler(NablaModel):
     tutorials: List[Tutorial] = tutorial_list
-    completed_tutorials: List[str] = []
     selected_tutorial_name: str | None = None
-    
+
+    def get_data(self, username):
+        if not pathlib.Path(user_data_path).exists():
+            data = {}
+            with open(user_data_path, "w") as f:
+                json.dump(data, f)
+        with open(user_data_path, "r") as f:
+            data = json.load(f)
+        return data
+
+    def read_user_data(self, username):
+        data = self.get_data(username)
+        if username not in data:
+            return
+        for tutorial in self.tutorials:
+            if tutorial.name in data[username]["completed_tutorials"]:
+                tutorial.completed = True
+
+    def write_user_data(self, username):
+        data = self.get_data(username)
+        data[username] = {"completed_tutorials": self.completed_tutorials}
+        with open(user_data_path, "w") as f:
+            json.dump(data, f)
+
     def get_tutorial(self, name):
         for tutorial in self.tutorials:
             if tutorial.name == name:
                 return tutorial
         return None
-    
+
+    @property
+    def completed_tutorials(self):
+        return [tutorial.name for tutorial in self.tutorials if tutorial.completed]
+
     @property
     def selected_tutorial(self):
         return self.get_tutorial(self.selected_tutorial_name)
