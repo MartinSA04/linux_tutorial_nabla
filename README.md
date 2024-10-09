@@ -1,4 +1,4 @@
-# linux_tutorial_nabla
+# Linux Tutorial Nabla
 
 Welcome to the Nabla Linux Tutorial! This project provides an interactive terminal-based tutorial for learning basic Linux commands and navigation. The tutorial is designed to help users understand and practice essential Linux commands in a simulated terminal environment.
 
@@ -10,6 +10,7 @@ Welcome to the Nabla Linux Tutorial! This project provides an interactive termin
 - [Tutorials](#tutorials)
 - [Contributing](#contributing)
 - [License](#license)
+- [Authors](#authors)
 
 ## Features
 
@@ -63,5 +64,8 @@ Please ensure your code follows the project's coding standards and includes appr
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Authors
+- [Martin Sundal Aspås](https://github.com/MartinSA04)
 
 Happy learning!
