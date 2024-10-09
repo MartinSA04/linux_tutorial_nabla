@@ -1,9 +1,7 @@
 import os
 from linux_tutorial_nabla.colors import Colors
 from linux_tutorial_nabla.tutorial import Step, Tutorial
-
-def empty():
-    pass
+from linux_tutorial_nabla.common import empty, make_nabla_dir, nabla_tutorial_path
 
 def pwd_check_completion(command, pwd):
     if command == "pwd":
@@ -26,16 +24,8 @@ step = Step(
     initialize=empty,
 )
 
-def nav_init():
-    try:
-        os.mkdir(os.path.expanduser("~/nabla_tutorial"))
-    except FileExistsError:
-        pass
-
 def cd_check_completion(command, pwd):
-    if pwd == os.path.expanduser("~/nabla_tutorial"):
-        return True
-    return False
+    return pwd == str(nabla_tutorial_path)
 
 step2 = Step(
     num=1,
@@ -60,11 +50,11 @@ step2 = Step(
     {Colors.g("Your second task is to move to the")} {Colors.B("/home/username/nabla_tutorial")} {Colors.g("directory.")}
     """,
     check_completion=cd_check_completion,
-    initialize=nav_init,
+    initialize=make_nabla_dir,
 )
 
 def ls_init():
-    open(os.path.expanduser("~/nabla_tutorial")+"/are_you_seeing_this.txt", 'a').close()
+    open(nabla_tutorial_path / "are_you_seeing_this.txt", 'a').close()
 
 def ls_check_completion(command, pwd):
     if command == "ls":

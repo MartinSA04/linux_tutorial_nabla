@@ -22,6 +22,8 @@ help_message = f"""
 
     {Colors.g('Useful commands for linux terminal:')}
         {Colors.M('help <command>')}{Colors.g(': View description and help info of a command.')}
+        {Colors.M('man <command>')}{Colors.g(': View manual of a command.')}
+        {Colors.M('whatis <command>')}{Colors.g(': View short description of a command.')}
 
 
     {Colors.g("NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available.")}

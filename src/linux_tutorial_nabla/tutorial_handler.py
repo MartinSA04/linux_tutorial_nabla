@@ -12,6 +12,7 @@ from linux_tutorial_nabla.tutorials import tutorial_list
 class TutorialHandler(NablaModel):
     tutorials: List[Tutorial] = tutorial_list
     selected_tutorial_name: str | None = None
+    stored_completed_tutorials: list = []
 
     def get_data(self, username):
         if not pathlib.Path(user_data_path).exists():
@@ -25,9 +26,11 @@ class TutorialHandler(NablaModel):
     def read_user_data(self, username):
         data = self.get_data(username)
         if username not in data:
+            self.stored_completed_tutorials = []
             return
+        self.stored_completed_tutorials = data[username]["completed_tutorials"]
         for tutorial in self.tutorials:
-            if tutorial.name in data[username]["completed_tutorials"]:
+            if tutorial.name in self.stored_completed_tutorials:
                 tutorial.completed = True
 
     def write_user_data(self, username):
@@ -57,12 +60,14 @@ class TutorialHandler(NablaModel):
         return [tutorial for tutorial in self.tutorials if tutorial.completed]
     
     def update_tutorials(self):
+        completed = copy.deepcopy(self.stored_completed_tutorials)
+        completed.extend(self.completed_tutorials)
         for tutorial in self.tutorials:
-            tutorial.update_available(self.completed_tutorials)
+            tutorial.update_available(completed)
     
     def print_tutorials(self):
         print(Colors.g("\nAvailable tutorials:"))
-        for tutorial in self.tutorials:
+        for tutorial in self.get_available_tutorials():
             print(str(tutorial))
         
         print(Colors.g("\nTo start a tutorial, type") + f" {Colors.M('start <tutorial name>')} " + Colors.g("and press enter.\n"))
@@ -71,6 +76,9 @@ class TutorialHandler(NablaModel):
     
     def start_tutorial(self, name):
         tutorial = self.get_tutorial(name)
+        if not tutorial.available:
+            print(f"\n{Colors.G('Tutorial is not available.')}\n")
+            return
         if tutorial:
             tutorial.completed = False
             self.selected_tutorial_name = tutorial.name
@@ -117,7 +125,6 @@ class TutorialHandler(NablaModel):
             complete = self.selected_tutorial.check_completion(command, pwd)
             if complete:
                 self.print_completed(self.selected_tutorial.name)
-                self.completed_tutorials.append(self.selected_tutorial.name)
                 self.selected_tutorial_name = None
                 self.print_status()
             return complete
