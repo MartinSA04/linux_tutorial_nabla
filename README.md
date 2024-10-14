@@ -22,6 +22,13 @@ Welcome to the Nabla Linux Tutorial! This project provides an interactive termin
 ## Installation
 
 To install the project, follow these steps:
+1. Install the project using pip:
+    ```sh
+    pip install linux-tutorial-nabla
+    ```    
+
+
+Alternatively install from source:
 
 1. Clone the repository:
     ```sh
@@ -38,7 +45,7 @@ To install the project, follow these steps:
 
 To start the tutorial, run the following command:
 ```sh
-python -m linux_tutorial_nabla
+linux_tutorial_nabla
 ```
 
 You will be greeted with a welcome message and instructions on how to use the tutorial. You can run any command you want, and the tutorial will help you understand it.
