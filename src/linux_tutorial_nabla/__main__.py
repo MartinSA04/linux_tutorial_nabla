@@ -1,5 +1,5 @@
 from linux_tutorial_nabla.terminal import Terminal
 
-if __name__ == "__main__":
+def main():
     terminal = Terminal()
     terminal.run()

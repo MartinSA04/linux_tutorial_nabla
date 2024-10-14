@@ -101,7 +101,8 @@ class Terminal(NablaModel):
                 print(repr(process.stderr.decode()))
                 print(Colors.g("Check spelling and syntax and try again!"))
             else:
-                print(process.stdout.decode(), end="")
+                if process.stdout.decode() != "":
+                    print(process.stdout.decode())
                 
                 if self.tutorial_handler.check_completion(command, self.pwd):
                     self.tutorial_handler.write_user_data(self.username)

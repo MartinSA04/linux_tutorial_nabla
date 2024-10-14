@@ -44,7 +44,7 @@ class Tutorial(NablaModel):
         return None
 
     def step_status(self):
-        print(f"{Colors.g('Current step:')} {Colors.B(str(self.current_step+1))+ Colors.g(' out of ')+Colors.B(str(len(self.steps)))}")
+        print(f"\n{Colors.g('Current step:')} {Colors.B(str(self.current_step+1))+ Colors.g(' out of ')+Colors.B(str(len(self.steps)))}")
         print(f"\n{Colors.g('Description:')} \n {self.get_step().description}")
 
     def check_completion(self, command, pwd):
