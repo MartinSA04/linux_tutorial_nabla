@@ -19,14 +19,14 @@ class Tutorial(NablaModel):
 
     def __str__(self):
         if self.completed:
-            return (f" * {Colors.G(self.name)}: {Colors.g(self.description+' - Completed')}")
+            return (f" * {Colors.success(self.name)}: {Colors.nabla_text(self.description+' - Completed')}")
         else:
-            return (f" * {Colors.B(self.name)}: {Colors.b(self.description)}{self.progress_bar}")
+            return (f" * {Colors.highlight(self.name)}: {Colors.other_text(self.description)}{self.progress_bar}")
 
     @property
     def progress_bar(self):
         if self.steps:
-            return f"{Colors.g(', Progress:')} {Colors.C('*')*self.current_step}{Colors.C('-')*(len(self.steps)-self.current_step)} {Colors.g(str(self.current_step*100/len(self.steps)))+Colors.g('%')}"
+            return f"{Colors.nabla_text(', Progress:')} {Colors.C('*')*self.current_step}{Colors.C('-')*(len(self.steps)-self.current_step)} {Colors.nabla_text(str(self.current_step*100/len(self.steps)))+Colors.nabla_text('%')}"
         else:
             return ""
 
@@ -44,20 +44,20 @@ class Tutorial(NablaModel):
         return None
 
     def step_status(self):
-        print(f"\n{Colors.g('Current step:')} {Colors.B(str(self.current_step+1))+ Colors.g(' out of ')+Colors.B(str(len(self.steps)))}")
-        print(f"\n{Colors.g('Description:')} \n {self.get_step().description}")
+        print(f"\n{Colors.nabla_text('Current step:')} {Colors.highlight(str(self.current_step+1))+ Colors.nabla_text(' out of ')+Colors.highlight(str(len(self.steps)))}")
+        print(f"\n{Colors.nabla_text('Description:')} \n {self.get_step().description}")
 
     def check_completion(self, command, pwd):
         complete = self.get_step().check_completion(command, pwd)
         if complete:
             self.current_step += 1
-            print(f"\n{Colors.G('Step completed!')}")
+            print(f"\n{Colors.success('Step completed!')}")
 
             if self.current_step == len(self.steps):
                 self.completed = True
                 self.current_step = 0
             else:
-                print(f"{Colors.g('Moving to next step...')}\n")
+                print(f"{Colors.nabla_text('Moving to next step...')}\n")
                 self.step_status()
                 self.get_step().initialize()
         return self.completed

@@ -66,28 +66,28 @@ class TutorialHandler(NablaModel):
             tutorial.update_available(completed)
     
     def print_tutorials(self):
-        print(Colors.g("\nAvailable tutorials:"))
+        print(Colors.nabla_text("\nAvailable tutorials:"))
         for tutorial in self.get_available_tutorials():
             print(str(tutorial))
         
-        print(Colors.g("\nTo start a tutorial, type") + f" {Colors.M('start <tutorial name>')} " + Colors.g("and press enter.\n"))
+        print(Colors.nabla_text(f"\nTo start a tutorial, type {Colors.command('start <tutorial name>')} and press enter.\n"))
         if self.selected_tutorial:
-            print(Colors.g("\nSelected tutorial:") + f" {Colors.B(self.selected_tutorial.name)}")
+            print(Colors.nabla_text("\nSelected tutorial:") + f" {Colors.highlight(self.selected_tutorial.name)}")
     
     def start_tutorial(self, name):
         tutorial = self.get_tutorial(name)
         if not tutorial.available:
-            print(f"\n{Colors.G('Tutorial is not available.')}\n")
+            print(f"\n{Colors.warning('Tutorial is not available.')}\n")
             return
         if tutorial:
             tutorial.completed = False
             self.selected_tutorial_name = tutorial.name
-            print(f"\n{Colors.g('Starting tutorial:')} {Colors.B(tutorial.name)}\n")
-            print(Colors.g(tutorial.description) + "\n")
+            print(f"\n{Colors.nabla_text('Starting tutorial:')} {Colors.highlight(tutorial.name)}\n")
+            print(Colors.nabla_text(tutorial.description) + "\n")
             tutorial.step_status()
             tutorial.get_step().initialize()
         else:
-            print(f"{Colors.g('Could not find tutorial:')} {Colors.B(name)}")
+            print(f"{Colors.nabla_text('Could not find tutorial:')} {Colors.highlight(name)}")
 
     def print_status(self):
         self.update_tutorials()
@@ -105,7 +105,7 @@ class TutorialHandler(NablaModel):
                 elif len(command) == 1:
                     self.print_status()
                 else:
-                    print(f"{Colors.g('Invalid command. Please type')} {Colors.M('start <tutorial name>')}")
+                    print(f"{Colors.nabla_text('Invalid command. Please type')} {Colors.command('start <tutorial name>')}")
                 return ""
             case "status":
                 self.print_status()
@@ -118,7 +118,7 @@ class TutorialHandler(NablaModel):
                 return original_command
     
     def print_completed(self, name):
-        print("\n" + Colors.G("Good job! You have completed the following tutorial: " + Colors.G(name)))
+        print("\n" + Colors.success("Good job! You have completed the following tutorial: " + Colors.success(name)))
 
     def check_completion(self, command, pwd):
         if self.selected_tutorial:

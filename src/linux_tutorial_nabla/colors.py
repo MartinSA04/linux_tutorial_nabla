@@ -46,3 +46,39 @@ class Colors:
     @staticmethod
     def w(string): return Fore.WHITE + string + Fore.RESET
 
+    @staticmethod
+    def command(s):
+        return Colors.M(s) + Fore.GREEN + Style.NORMAL
+    
+    @staticmethod
+    def highlight(s):
+        return Colors.B(s) + Fore.GREEN + Style.NORMAL
+    
+    @staticmethod
+    def error(s):
+        return Colors.R(s) + Fore.GREEN + Style.NORMAL
+    
+    @staticmethod
+    def success(s):
+        return Colors.G(s) + Fore.GREEN + Style.NORMAL
+    
+    @staticmethod
+    def info(s):
+        return Colors.C(s) + Fore.GREEN + Style.NORMAL
+    
+    @staticmethod
+    def warning(s):
+        return Colors.Y(s) + Fore.GREEN + Style.NORMAL
+    
+    @staticmethod
+    def bold(s):
+        return Style.BRIGHT + s + Style.NORMAL
+    
+    @staticmethod
+    def nabla_text(s):
+        return Colors.g(s)
+    
+    @staticmethod
+    def other_text(s):
+        return Colors.b(s) + Fore.GREEN + Style.NORMAL
+
