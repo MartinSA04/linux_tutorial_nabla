@@ -1,7 +1,7 @@
 import os
 from linux_tutorial_nabla.colors import Colors
 from linux_tutorial_nabla.tutorial import Step, Tutorial
-from linux_tutorial_nabla.common import make_nabla_dir, nabla_tutorial_path, empty, get_full_dir
+from linux_tutorial_nabla.common import TUTORIALS, make_nabla_dir, nabla_tutorial_path, empty, get_full_dir
 
 first_file = "first_file.txt"
 first_file_path = nabla_tutorial_path / first_file
@@ -82,8 +82,8 @@ step3 = Step(
 )
 
 file_1 = Tutorial(
-    name="File_Basics",
+    name=TUTORIALS.FILE_BASICS,
     description="Learn how to navigate the terminal",
     steps=[step, step2, step3],
-    dependencies=["Navigation"]
+    dependencies=[TUTORIALS.NAVIGATION],
 )

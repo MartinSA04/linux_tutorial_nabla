@@ -1,6 +1,6 @@
 [project]
 name = "linux_tutorial_nabla"
-version = "0.1.1"
+version = "0.1.2"
 description = "Interactive Linux tutorial for beginners"
 authors = [
     {name = "Martin Sundal Aspås", email = "martin.s.aspas@gmail.com"},
