@@ -21,7 +21,7 @@ class TabCompleter(NablaModel):
         if os.path.isdir(last_part):
             last_part += '/'
 
-        paths = [text + x.removeprefix(last_part) for x in glob.glob(text + '*')]
+        paths = [text + x.removeprefix(last_part) for x in glob.glob(last_part + '*')]
 
         return paths
     
