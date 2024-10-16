@@ -12,6 +12,7 @@ user_data_path = pathlib.Path(__file__).parent.resolve() / "user_data.json"
 nabla_tutorial_path = pathlib.Path(os.path.expanduser("~/nabla_tutorial"))
 
 def empty():
+    # do nothing
     pass
 
 def make_nabla_dir():
@@ -29,3 +30,13 @@ def get_full_dir(arg, pwd):
 
 class NablaModel(BaseModel):
     model_config = model_config
+
+# should be strenum, introduced in python 3.10
+class _TUTORIALS(NablaModel):
+    FILE_BASICS: str = "File_Basics"
+    NAVIGATION: str = "Navigation"
+
+    @property
+    def ALL(self):
+        return [x for x in self.__dict__.values() if not x.startswith("_")]
+TUTORIALS = _TUTORIALS()

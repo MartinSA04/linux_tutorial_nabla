@@ -26,7 +26,7 @@ help_message = Colors.nabla_text(f"""
         {Colors.command('whatis <command>')}: View short description of a command.
 
 
-    "NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available."
+    NOTE: This is a python script, not a real terminal. Some commands may not work as expected.
 """)
 
 nabla_art = """
@@ -53,7 +53,7 @@ start_message = Colors.nabla_text(f"""
 
         Type {Colors.command('start')} and press enter to see completed and available tutorials.
 
-        NOTE: This is a python script, not a real terminal. Some commands may not work as expected. Auto-complete is not available."
+        NOTE: This is a python script, not a real terminal. Some commands may not work as expected.
         """)
 
 

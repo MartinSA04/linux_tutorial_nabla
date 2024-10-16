@@ -1,7 +1,7 @@
 import os
 from linux_tutorial_nabla.colors import Colors
 from linux_tutorial_nabla.tutorial import Step, Tutorial
-from linux_tutorial_nabla.common import empty, make_nabla_dir, nabla_tutorial_path
+from linux_tutorial_nabla.common import TUTORIALS, empty, make_nabla_dir, nabla_tutorial_path
 
 def pwd_check_completion(command, pwd):
     if command == "pwd":
@@ -76,7 +76,7 @@ step3 = Step(
 )
 
 navigation_tutorial = Tutorial(
-    name="Navigation",
+    name=TUTORIALS.NAVIGATION,
     description="Learn how to navigate the terminal",
     steps=[step, step2, step3]
 )
